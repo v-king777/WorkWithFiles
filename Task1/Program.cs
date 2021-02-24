@@ -22,21 +22,21 @@ namespace Task1
             {
                 DirectoryInfo dirInfo = new DirectoryInfo(folderPath);
 
-                foreach (var item in dirInfo.GetDirectories())
+                foreach (var dir in dirInfo.GetDirectories())
                 {
-                    if (DateTime.Now - item.LastAccessTime > TimeSpan.FromMinutes(30))
+                    if (DateTime.Now - dir.LastAccessTime > TimeSpan.FromMinutes(30))
                     {
-                        item.Delete(true);
-                        Console.WriteLine("Папка '{0}' удалена", item.Name);
+                        dir.Delete(true);
+                        Console.WriteLine("Папка '{0}' удалена", dir.Name);
                     }
                 }
 
-                foreach (var item in dirInfo.GetFiles())
+                foreach (var file in dirInfo.GetFiles())
                 {
-                    if (DateTime.Now - item.LastAccessTime > TimeSpan.FromMinutes(30))
+                    if (DateTime.Now - file.LastAccessTime > TimeSpan.FromMinutes(30))
                     {
-                        item.Delete();
-                        Console.WriteLine("Файл '{0}' удалён", item.Name);
+                        file.Delete();
+                        Console.WriteLine("Файл '{0}' удалён", file.Name);
                     }
                 }
             }
