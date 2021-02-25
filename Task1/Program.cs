@@ -7,7 +7,9 @@ namespace Task1
     {
         static void Main(string[] args)
         {
-            TimePathCleaner(@"D:\WorkWithFiles\Task1\TestFolder\");
+            var path = Path.Combine("E:", "WorkWithFiles", "Task1", "TestFolder");
+            Console.WriteLine(path);
+            TimePathCleaner(path);
         }
 
         static void TimePathCleaner(string folderPath)
@@ -42,7 +44,7 @@ namespace Task1
             }
             catch (Exception e)
             {
-                Console.WriteLine("Ошибка: " + e.Message);
+                Console.WriteLine("Произошла ошибка: " + e.Message);
             }
         }
     }
