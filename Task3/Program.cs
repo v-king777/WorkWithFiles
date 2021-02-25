@@ -72,7 +72,7 @@ namespace Task3
 
                 foreach (var dir in dirInfo.GetDirectories())
                 {
-                    if (DateTime.Now - dir.LastAccessTime > TimeSpan.FromMinutes(1))
+                    if (DateTime.Now - dir.LastAccessTime > TimeSpan.FromMinutes(30))
                     {
                         dir.Delete(true);
                         Console.WriteLine("Папка '{0}' удалена", dir.Name);
@@ -81,7 +81,7 @@ namespace Task3
 
                 foreach (var file in dirInfo.GetFiles())
                 {
-                    if (DateTime.Now - file.LastAccessTime > TimeSpan.FromMinutes(1))
+                    if (DateTime.Now - file.LastAccessTime > TimeSpan.FromMinutes(30))
                     {
                         file.Delete();
                         Console.WriteLine("Файл '{0}' удалён", file.Name);
