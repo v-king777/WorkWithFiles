@@ -10,6 +10,8 @@ namespace Task2
             string folderPath = Path.Combine("E:", "WorkWithFiles", "Task2", "TestFolder");
             double folderSize = 0;
 
+            Console.WriteLine(folderPath);
+
             FolderSizeCalculation(folderPath, ref folderSize);
 
             Console.WriteLine("Размер папки: {0} байт", folderSize);
