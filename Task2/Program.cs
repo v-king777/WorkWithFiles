@@ -14,7 +14,10 @@ namespace Task2
 
             FolderSizeCalculation(folderPath, ref folderSize);
 
-            Console.WriteLine("Размер папки: {0} байт", folderSize);
+            if (folderSize != 0)
+            {
+                Console.WriteLine("Размер папки: {0} байт", folderSize);
+            }
         }
 
         static void FolderSizeCalculation(string path, ref double size)
