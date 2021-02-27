@@ -10,32 +10,47 @@ namespace Task4
         {
             var desktop = Environment.SpecialFolder.Desktop;
             var dirPath = Path.Combine(Environment.GetFolderPath(desktop), "Students");
-
-            DirectoryInfo dirInfo = new DirectoryInfo(dirPath);
+            var filePath = Path.Combine(Environment.GetFolderPath(desktop), "Students.dat");
 
             if (!Directory.Exists(dirPath))
             {
+                DirectoryInfo dirInfo = new DirectoryInfo(dirPath);
                 dirInfo.Create();
             }
 
-            string filePath = Path.Combine(Environment.GetFolderPath(desktop), "Students.dat");
-
-            if (File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
-                BinaryFormatter formatter = new BinaryFormatter();
+                Console.WriteLine("Файл 'Students.dat' не найден");
+                return;
+            }
 
-                using (var fs = new FileStream(filePath, FileMode.Open))
+            ReadFile(filePath);
+        }
+
+        /// <summary>
+        /// Метод десериализует данные из файла Students.dat
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns>Возвращает массив объектов класса Student</returns>
+        static Student[] ReadFile(string path)
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+
+            using (var fs = new FileStream(path, FileMode.Open))
+            {
+                var newStudent = (Student[])formatter.Deserialize(fs);
+
+                foreach (var item in newStudent)
                 {
-                    var newStudent = (Student)formatter.Deserialize(fs);
-                    Console.WriteLine("Объект десериализован");
-                    Console.WriteLine("Имя: " + newStudent.Name);
-                    Console.WriteLine("Группа: " + newStudent.Group);
-                    Console.WriteLine("Дата рождения: " + newStudent.DateOfBirth);
+                    Console.WriteLine("Студент: {0}\t{1}\t{2}", item.Name, item.Group, item.DateOfBirth);
                 }
+
+                return newStudent;
             }
         }
     }
 
+    [Serializable]
     class Student
     {
         public string Name { get; set; }
