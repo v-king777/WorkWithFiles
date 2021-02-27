@@ -1,31 +1,52 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Task4
 {
     class Program
     {
-        public static void Main()
+        static void Main(string[] args)
         {
-            // сохраняем путь к файлу (допустим, вы его скачали на рабочий стол)
-            string filePath = @"E:\WorkWithFiles\Task4\BinaryFile.bin";
+            var desktop = Environment.SpecialFolder.Desktop;
+            var dirPath = Path.Combine(Environment.GetFolderPath(desktop), "Students");
 
-            // при запуске проверим, что файл существует
+            DirectoryInfo dirInfo = new DirectoryInfo(dirPath);
+
+            if (!Directory.Exists(dirPath))
+            {
+                dirInfo.Create();
+            }
+
+            string filePath = Path.Combine(Environment.GetFolderPath(desktop), "Students.dat");
+
             if (File.Exists(filePath))
             {
-                // строковая переменная, в которую будем считывать данные
-                string stringValue;
+                BinaryFormatter formatter = new BinaryFormatter();
 
-                // считываем, после использования высвобождаем задействованный ресурс BinaryReader
-                using (BinaryReader reader = new BinaryReader(File.Open(filePath, FileMode.Open)))
+                using (var fs = new FileStream(filePath, FileMode.Open))
                 {
-                    stringValue = reader.ReadString();
+                    var newStudent = (Student)formatter.Deserialize(fs);
+                    Console.WriteLine("Объект десериализован");
+                    Console.WriteLine("Имя: " + newStudent.Name);
+                    Console.WriteLine("Группа: " + newStudent.Group);
+                    Console.WriteLine("Дата рождения: " + newStudent.DateOfBirth);
                 }
-
-                // Вывод
-                Console.WriteLine("Из файла считано:");
-                Console.WriteLine(stringValue);
             }
+        }
+    }
+
+    class Student
+    {
+        public string Name { get; set; }
+        public string Group { get; set; }
+        public DateTime DateOfBirth { get; set; }
+
+        public Student(string name, string group, DateTime dateOfBirth)
+        {
+            Name = name;
+            Group = group;
+            DateOfBirth = dateOfBirth;
         }
     }
 }
