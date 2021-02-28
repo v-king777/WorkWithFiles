@@ -15,6 +15,7 @@ namespace FinalTask
             CreateDirectory();
             if (!Directory.Exists(DirPath))
             {
+                Console.WriteLine("\nПапка 'Students' не создана!");
                 Console.WriteLine("\nДля продолжения нажмите любую клавишу . . .");
                 Console.ReadKey(true);
                 return;
