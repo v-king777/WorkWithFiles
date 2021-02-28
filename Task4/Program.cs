@@ -48,13 +48,10 @@ namespace FinalTask
         static Student[] ReadFile(string path)
         {
             BinaryFormatter formatter = new BinaryFormatter();
-
             using (var fs = new FileStream(path, FileMode.Open))
             {
                 var newStudent = (Student[])formatter.Deserialize(fs);
-
                 Console.WriteLine("Получены данные из файла 'Students.dat'\n");
-
                 return newStudent;
             }
         }
@@ -73,11 +70,9 @@ namespace FinalTask
             }
 
             var students = ReadFile(FilePath);
-
             foreach (var item in students)
             {
                 string path = Path.Combine(DirPath, item.Group + ".txt");
-
                 if (!File.Exists(path))
                 {
                     using (StreamWriter sw = File.CreateText(path))
@@ -94,9 +89,7 @@ namespace FinalTask
             }
 
             Console.WriteLine("Студенты раскиданы по группам в отдельные файлы:\n");
-
             string[] files = Directory.GetFiles(DirPath);
-
             foreach (var item in files)
             {
                 Console.WriteLine(item);
