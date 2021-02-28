@@ -64,10 +64,12 @@ namespace FinalTask
         /// </summary>
         static void SortByGroup()
         {
-            if (!File.Exists(FilePath))
+            while (!File.Exists(FilePath))
             {
-                Console.WriteLine("Файл 'Students.dat' не найден, поместите его на рабочий стол");
-                return;
+                Console.WriteLine("Файл 'Students.dat' не найден!");
+                Console.WriteLine("Поместите его на рабочий стол,");
+                Console.WriteLine("затем нажмите любую клавишу . . .\n");
+                Console.ReadKey(true);
             }
 
             var students = ReadFile(FilePath);
