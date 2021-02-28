@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task1", "Task1\Task1.csproj", "{0031333F-23A3-4381-90F5-7169C1B9299E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task1", "Task1\Task1.csproj", "{0031333F-23A3-4381-90F5-7169C1B9299E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task2", "Task2\Task2.csproj", "{8D1E4C0B-D113-4B79-868C-024525F334F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task2", "Task2\Task2.csproj", "{8D1E4C0B-D113-4B79-868C-024525F334F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task3", "Task3\Task3.csproj", "{73C265FE-F8DE-436C-AD21-82EEE4B8F8EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task3", "Task3\Task3.csproj", "{73C265FE-F8DE-436C-AD21-82EEE4B8F8EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task4", "Task4\Task4.csproj", "{7CBBC457-A23C-4CDF-AC1E-84F834358DF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalTask", "Task4\FinalTask.csproj", "{7CBBC457-A23C-4CDF-AC1E-84F834358DF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
