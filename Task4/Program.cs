@@ -14,6 +14,9 @@ namespace FinalTask
         {
             CreateDirectory();
             SortByGroup();
+
+            Console.WriteLine("\nДля продолжения нажмите любую клавишу . . .");
+            Console.ReadKey(true);
         }
 
         /// <summary>
