@@ -2,7 +2,7 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace Task4
+namespace FinalTask
 {
     class Program
     {
@@ -16,11 +16,12 @@ namespace Task4
             {
                 DirectoryInfo dirInfo = new DirectoryInfo(dirPath);
                 dirInfo.Create();
+                Console.WriteLine("Папка 'Students' создана на рабочем столе");
             }
 
             if (!File.Exists(filePath))
             {
-                Console.WriteLine("Файл 'Students.dat' не найден");
+                Console.WriteLine("Файл 'Students.dat' не найден, поместите его на рабочий стол");
                 return;
             }
 
@@ -42,7 +43,7 @@ namespace Task4
 
                 foreach (var item in newStudent)
                 {
-                    Console.WriteLine("Студент: {0}\t{1}\t{2}", item.Name, item.Group, item.DateOfBirth);
+                    Console.WriteLine("Студент {0}, группа {1}, дата рождения {2}", item.Name, item.Group, item.DateOfBirth);
                 }
 
                 return newStudent;
