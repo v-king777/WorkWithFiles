@@ -36,8 +36,7 @@ namespace FinalTask
             {
                 if (!Directory.Exists(DirPath))
                 {
-                    DirectoryInfo dirInfo = new DirectoryInfo(DirPath);
-                    dirInfo.Create();
+                    Directory.CreateDirectory(DirPath);
                     Console.WriteLine("Папка 'Students' создана на рабочем столе\n");
                 }
             }
