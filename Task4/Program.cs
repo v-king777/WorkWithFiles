@@ -6,33 +6,42 @@ namespace FinalTask
 {
     class Program
     {
+        static readonly Environment.SpecialFolder Desktop = Environment.SpecialFolder.Desktop;
+        static readonly string DirPath = Path.Combine(Environment.GetFolderPath(Desktop), "Students");
+        static readonly string FilePath = Path.Combine(Environment.GetFolderPath(Desktop), "Students.dat");
+
         static void Main(string[] args)
         {
-            var desktop = Environment.SpecialFolder.Desktop;
-            var dirPath = Path.Combine(Environment.GetFolderPath(desktop), "Students");
-            var filePath = Path.Combine(Environment.GetFolderPath(desktop), "Students.dat");
+            CreateDirectory();
+            SortByGroup();
+        }
 
-            if (!Directory.Exists(dirPath))
+        /// <summary>
+        /// Метод создаёт папку на рабочем столе
+        /// </summary>
+        static void CreateDirectory()
+        {
+            try
             {
-                DirectoryInfo dirInfo = new DirectoryInfo(dirPath);
-                dirInfo.Create();
-                Console.WriteLine("Папка 'Students' создана на рабочем столе");
+                if (!Directory.Exists(DirPath))
+                {
+                    DirectoryInfo dirInfo = new DirectoryInfo(DirPath);
+                    dirInfo.Create();
+                    Console.WriteLine("Папка 'Students' создана на рабочем столе\n");
+                }
             }
-
-            if (!File.Exists(filePath))
+            catch (Exception e)
             {
-                Console.WriteLine("Файл 'Students.dat' не найден, поместите его на рабочий стол");
+                Console.WriteLine("Произошла ошибка: " + e.Message);
                 return;
             }
-
-            ReadFile(filePath);
         }
 
         /// <summary>
         /// Метод десериализует данные из файла Students.dat
         /// </summary>
         /// <param name="path"></param>
-        /// <returns>Возвращает массив объектов класса Student</returns>
+        /// <returns>Массив объектов класса Student</returns>
         static Student[] ReadFile(string path)
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -41,12 +50,51 @@ namespace FinalTask
             {
                 var newStudent = (Student[])formatter.Deserialize(fs);
 
-                foreach (var item in newStudent)
-                {
-                    Console.WriteLine("Студент {0}, группа {1}, дата рождения {2}", item.Name, item.Group, item.DateOfBirth);
-                }
+                Console.WriteLine("Получены данные из файла 'Students.dat'\n");
 
                 return newStudent;
+            }
+        }
+
+        /// <summary>
+        /// Метод раскидывает студентов по группам в отдельные файлы
+        /// </summary>
+        static void SortByGroup()
+        {
+            if (!File.Exists(FilePath))
+            {
+                Console.WriteLine("Файл 'Students.dat' не найден, поместите его на рабочий стол");
+                return;
+            }
+
+            var students = ReadFile(FilePath);
+
+            foreach (var item in students)
+            {
+                string path = Path.Combine(DirPath, item.Group + ".txt");
+
+                if (!File.Exists(path))
+                {
+                    using (StreamWriter sw = File.CreateText(path))
+                    {
+                        foreach (var item2 in students)
+                        {
+                            if (item2.Group == item.Group)
+                            {
+                                sw.WriteLine("Студент {0}, дата рождения {1}", item2.Name, item2.DateOfBirth);
+                            }
+                        }
+                    }
+                }
+            }
+
+            Console.WriteLine("Студенты раскиданы по группам в отдельные файлы:\n");
+
+            string[] files = Directory.GetFiles(DirPath);
+
+            foreach (var item in files)
+            {
+                Console.WriteLine(item);
             }
         }
     }
