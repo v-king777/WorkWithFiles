@@ -15,6 +15,8 @@ namespace FinalTask
             CreateDirectory();
             if (!Directory.Exists(DirPath))
             {
+                Console.WriteLine("\nДля продолжения нажмите любую клавишу . . .");
+                Console.ReadKey(true);
                 return;
             }
 
