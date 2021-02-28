@@ -13,6 +13,11 @@ namespace FinalTask
         static void Main(string[] args)
         {
             CreateDirectory();
+            if (!Directory.Exists(DirPath))
+            {
+                return;
+            }
+
             SortByGroup();
 
             Console.WriteLine("\nДля продолжения нажмите любую клавишу . . .");
