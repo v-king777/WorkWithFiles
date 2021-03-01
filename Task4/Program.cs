@@ -12,16 +12,19 @@ namespace FinalTask
 
         static void Main(string[] args)
         {
-            CreateDirectory();
-            if (!Directory.Exists(DirPath))
+            try
             {
-                Console.WriteLine("\nПапка 'Students' не создана!");
-                Console.WriteLine("\nДля продолжения нажмите любую клавишу . . .");
-                Console.ReadKey(true);
-                return;
+                CreateDirectory();
+                SortByGroup();
             }
-
-            SortByGroup();
+            catch (Exception ex) when (ex is UnauthorizedAccessException)
+            {
+                Console.WriteLine("Отказано в доступе: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Произошла ошибка: " + ex.Message);
+            }
 
             Console.WriteLine("\nДля продолжения нажмите любую клавишу . . .");
             Console.ReadKey(true);
@@ -32,19 +35,14 @@ namespace FinalTask
         /// </summary>
         static void CreateDirectory()
         {
-            try
+            if (Directory.Exists(DirPath))
             {
-                if (!Directory.Exists(DirPath))
-                {
-                    Directory.CreateDirectory(DirPath);
-                    Console.WriteLine("Папка 'Students' создана на рабочем столе\n");
-                }
+                DirectoryInfo dirInfo = new DirectoryInfo(DirPath);
+                dirInfo.Delete(true);
             }
-            catch (Exception e)
-            {
-                Console.WriteLine("Произошла ошибка: " + e.Message);
-                return;
-            }
+
+            Directory.CreateDirectory(DirPath);
+            Console.WriteLine("Папка 'Students' создана на рабочем столе\n");
         }
 
         /// <summary>
