@@ -21,6 +21,10 @@ namespace FinalTask
             {
                 Console.WriteLine("Отказано в доступе: " + ex.Message);
             }
+            catch (Exception ex) when (ex is FileNotFoundException)
+            {
+                Console.WriteLine("Файл не найден: " + ex.Message);
+            }
             catch (Exception ex)
             {
                 Console.WriteLine("Произошла ошибка: " + ex.Message);
@@ -66,14 +70,6 @@ namespace FinalTask
         /// </summary>
         static void SortByGroup()
         {
-            while (!File.Exists(FilePath))
-            {
-                Console.WriteLine("Файл 'Students.dat' не найден!");
-                Console.WriteLine("Поместите его на рабочий стол,");
-                Console.WriteLine("затем нажмите любую клавишу . . .\n");
-                Console.ReadKey(true);
-            }
-
             var students = ReadFile(FilePath);
             foreach (var item in students)
             {
