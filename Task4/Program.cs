@@ -25,6 +25,10 @@ namespace FinalTask
             {
                 Console.WriteLine("Файл не найден: " + ex.Message);
             }
+            catch (Exception ex) when (ex is IOException)
+            {
+                Console.WriteLine("Файл чем-то занят: " + ex.Message);
+            }
             catch (Exception ex)
             {
                 Console.WriteLine("Произошла ошибка: " + ex.Message);
